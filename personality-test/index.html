@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人格类型测试 - 四种核心人格评估</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#EC4899',
+                        tertiary: '#10B981',
+                        danger: '#EF4444',
+                        warning: '#F59E0B',
+                        info: '#3B82F6',
+                        light: '#F3F4F6',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'fade-out': 'fadeOut 0.2s ease-in-out',
+                        'slide-in': 'slideIn 0.5s ease-in-out',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        fadeOut: {
+                            '0%': { opacity: '1' },
+                            '100%': { opacity: '0' },
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .btn-primary {
+                @apply bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+            }
+            .btn-secondary {
+                @apply bg-white text-primary border border-primary px-6 py-3 rounded-lg font-medium hover:bg-primary/5 transition-colors duration-300;
+            }
+            .input-radio {
+                @apply w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded-full;
+            }
+            .progress-bar {
+                @apply h-2 bg-gray-200 rounded-full overflow-hidden;
+            }
+            .progress-fill {
+                @apply h-full bg-primary transition-all duration-300 ease-out;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fa fa-heart text-primary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-900">心理测试</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="helpBtn" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <i class="fa fa-question-circle mr-1"></i> 帮助
+                    </button>
+                    <button id="shareBtn" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <i class="fa fa-share-alt mr-1"></i> 分享
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- 开始页面 -->
+        <div id="startPage" class="animate-fade-in">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4 text-shadow">四种核心人格类型测试</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    通过这个专业测试，了解你的核心人格类型：恐惧冲突压抑型、资源匮乏争夺型、表达无价值讨好型、世界危险控制型
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-shield text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900">恐惧冲突压抑型</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        核心思维："冲突是危险的，压抑是唯一选择"。害怕与人发生冲突，习惯压抑自己的真实想法和需求。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-trophy text-secondary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900">资源匮乏争夺型</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        核心思维："资源有限，必须争夺"。认为世界资源稀缺，需要通过竞争和争夺才能获得自己想要的东西。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-tertiary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-users text-tertiary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900">表达无价值讨好型</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        核心思维："我的价值取决于他人认可"。习惯通过讨好他人来获得认可，害怕被拒绝和否定。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-warning/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-cogs text-warning text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900">世界危险控制型</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        核心思维："世界充满危险，必须严格控制"。认为世界不安全，需要通过控制来避免危险和不确定性。
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">测试说明</h3>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-start">
+                        <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                        <span>共16道题目，每道题有4个选项</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                        <span>请选择最符合你真实情况的选项，无对错之分</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                        <span>测试时间约5-10分钟，请在安静的环境中完成</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                        <span>完成后将获得详细的人格分析报告</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="text-center">
+                <button id="startTestBtn" class="btn-primary">
+                    <i class="fa fa-play-circle mr-2"></i>开始测试
+                </button>
+            </div>
+        </div>
+
+        <!-- 测试页面 -->
+        <div id="testPage" class="hidden animate-fade-in">
+            <!-- 进度条 -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-gray-700">进度</span>
+                    <span id="progressText" class="text-sm font-medium text-primary">1/16</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill" style="width: 6.25%"></div>
+                </div>
+            </div>
+
+            <!-- 题目区域 -->
+            <div class="bg-white rounded-xl shadow-md p-8 mb-8">
+                <h2 id="questionNumber" class="text-lg font-semibold text-gray-500 mb-4">题目 1/16</h2>
+                <h3 id="questionText" class="text-2xl font-bold text-gray-900 mb-6">当你与同事/朋友产生意见分歧时，你的第一反应是？</h3>
+                
+                <div id="optionsContainer" class="space-y-4">
+                    <!-- 选项将通过JavaScript动态生成 -->
+                </div>
+            </div>
+
+            <!-- 导航按钮 -->
+            <div class="flex justify-between">
+                <button id="prevBtn" class="btn-secondary opacity-50 cursor-not-allowed" disabled>
+                    <i class="fa fa-arrow-left mr-2"></i>上一题
+                </button>
+                <button id="nextBtn" class="btn-primary">
+                    下一题<i class="fa fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 结果页面 -->
+        <div id="resultPage" class="hidden animate-fade-in">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4 text-shadow">测试结果</h1>
+                <p class="text-xl text-gray-600">根据你的回答，我们分析出你的核心人格类型</p>
+            </div>
+
+            <!-- 核心人格类型 -->
+            <div id="mainPersonality" class="bg-gradient-to-r from-primary to-purple-600 text-white rounded-2xl shadow-lg p-8 mb-8 animate-pulse-slow">
+                <h2 class="text-3xl font-bold mb-4">核心人格类型</h2>
+                <div class="flex items-center justify-center mb-6">
+                    <div id="personalityIcon" class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mr-4">
+                        <i id="personalityIconClass" class="fa fa-shield text-4xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <h3 id="personalityName" class="text-2xl font-bold mb-2">恐惧冲突压抑型</h3>
+                        <p id="personalityDescription" class="text-lg opacity-90">
+                            你倾向于避免冲突，习惯压抑自己的真实想法和需求。
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
+                    <h4 class="text-xl font-semibold mb-3">核心思维剧本</h4>
+                    <p id="coreBelief" class="text-lg">
+                        "冲突是危险的，压抑是唯一选择"
+                    </p>
+                </div>
+            </div>
+
+            <!-- 维度得分图表 -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h3 class="text-2xl font-semibold text-gray-900 mb-6">各维度得分</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="text-center">
+                        <div class="w-full progress-bar mb-2">
+                            <div id="dimension1Bar" class="progress-fill bg-primary" style="width: 75%"></div>
+                        </div>
+                        <p class="text-sm font-medium text-gray-700">恐惧冲突型</p>
+                        <p id="dimension1Score" class="text-2xl font-bold text-primary">3.0</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-full progress-bar mb-2">
+                            <div id="dimension2Bar" class="progress-fill bg-secondary" style="width: 50%"></div>
+                        </div>
+                        <p class="text-sm font-medium text-gray-700">资源匮乏型</p>
+                        <p id="dimension2Score" class="text-2xl font-bold text-secondary">2.0</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-full progress-bar mb-2">
+                            <div id="dimension3Bar" class="progress-fill bg-tertiary" style="width: 25%"></div>
+                        </div>
+                        <p class="text-sm font-medium text-gray-700">表达无价值型</p>
+                        <p id="dimension3Score" class="text-2xl font-bold text-tertiary">1.5</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-full progress-bar mb-2">
+                            <div id="dimension4Bar" class="progress-fill bg-warning" style="width: 37.5%"></div>
+                        </div>
+                        <p class="text-sm font-medium text-gray-700">世界危险控制型</p>
+                        <p id="dimension4Score" class="text-2xl font-bold text-warning">1.8</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 详细解读 -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h3 class="text-2xl font-semibold text-gray-900 mb-4">详细解读</h3>
+                
+                <div class="mb-6">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">核心特征</h4>
+                    <ul id="coreFeatures" class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-3 text-xs"></i>
+                            <span>害怕与人发生冲突，倾向于妥协和让步</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-3 text-xs"></i>
+                            <span>习惯压抑自己的真实想法和情感需求</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-3 text-xs"></i>
+                            <span>过度在意他人的评价和看法</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">形成原因</h4>
+                    <p id="formationReasons" class="text-gray-600 leading-relaxed">
+                        这种人格类型通常形成于童年时期，可能是在充满冲突的家庭环境中成长，或者曾经因为表达真实想法而受到惩罚或否定。长期以来，你学会了通过压抑自己来维持关系的和谐。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">优势与挑战</h4>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h5 class="font-semibold text-green-800 mb-2">优势</h5>
+                            <ul id="strengths" class="space-y-2 text-gray-600">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check text-green-600 mt-1 mr-2"></i>
+                                    <span>善于维持和谐的人际关系</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check text-green-600 mt-1 mr-2"></i>
+                                    <span>富有同理心，能理解他人感受</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check text-green-600 mt-1 mr-2"></i>
+                                    <span>在团队中是很好的协调者</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h5 class="font-semibold text-red-800 mb-2">挑战</h5>
+                            <ul id="challenges" class="space-y-2 text-gray-600">
+                                <li class="flex items-start">
+                                    <i class="fa fa-exclamation text-red-600 mt-1 mr-2"></i>
+                                    <span>容易忽视自己的需求和感受</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-exclamation text-red-600 mt-1 mr-2"></i>
+                                    <span>长期压抑可能导致情绪问题</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-exclamation text-red-600 mt-1 mr-2"></i>
+                                    <span>在需要表达立场时缺乏自信</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">成长建议</h4>
+                    <ul id="growthSuggestions" class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fa fa-lightbulb-o text-yellow-600 mt-1 mr-3"></i>
+                            <div>
+                                <span class="font-medium">练习温和地表达自己的想法</span>
+                                <p class="mt-1 text-gray-500">可以从小事开始，逐渐建立表达的自信</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-lightbulb-o text-yellow-600 mt-1 mr-3"></i>
+                            <div>
+                                <span class="font-medium">区分"冲突"和"建设性沟通"</span>
+                                <p class="mt-1 text-gray-500">学会用平和的方式表达不同意见</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-lightbulb-o text-yellow-600 mt-1 mr-3"></i>
+                            <div>
+                                <span class="font-medium">关注自己的需求</span>
+                                <p class="mt-1 text-gray-500">定期反思自己的感受和需求，不要总是优先考虑他人</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button id="saveResultBtn" class="btn-secondary">
+                    <i class="fa fa-download mr-2"></i>保存结果
+                </button>
+                <button id="shareResultBtn" class="btn-primary">
+                    <i class="fa fa-share-alt mr-2"></i>分享结果
+                </button>
+                <button id="restartBtn" class="btn-secondary">
+                    <i class="fa fa-refresh mr-2"></i>重新测试
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 帮助模态框 -->
+    <div id="helpModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-gray-900">测试帮助</h3>
+                    <button id="closeHelpBtn" class="text-gray-500 hover:text-gray-700">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="space-y-4 text-gray-600">
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-2">如何完成测试？</h4>
+                        <p>点击"开始测试"按钮，然后回答16道题目。每道题有4个选项，请选择最符合你真实情况的选项。</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-2">测试结果有什么用？</h4>
+                        <p>测试结果可以帮助你了解自己的核心人格类型，以及这种人格类型的形成原因、优势挑战和成长建议。</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-2">结果准确吗？</h4>
+                        <p>这个测试基于心理学理论设计，但仅供参考。人格是复杂的，测试结果不能完全代表你的全部。</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-2">如何保存结果？</h4>
+                        <p>完成测试后，你可以点击"保存结果"按钮将结果保存为图片，或者点击"分享结果"分享到社交媒体。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 分享模态框 -->
+    <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-xl max-w-md w-full">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-gray-900">分享测试</h3>
+                    <button id="closeShareBtn" class="text-gray-500 hover:text-gray-700">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+                <p class="text-gray-600 mb-6">分享这个有趣的人格测试给你的朋友吧！</p>
+                <div class="grid grid-cols-4 gap-4 mb-6">
+                    <button class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fa fa-weixin text-green-600 text-2xl mb-2"></i>
+                        <span class="text-sm text-gray-700">微信</span>
+                    </button>
+                    <button class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fa fa-weibo text-red-600 text-2xl mb-2"></i>
+                        <span class="text-sm text-gray-700">微博</span>
+                    </button>
+                    <button class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fa fa-qq text-blue-600 text-2xl mb-2"></i>
+                        <span class="text-sm text-gray-700">QQ</span>
+                    </button>
+                    <button class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fa fa-link text-gray-600 text-2xl mb-2"></i>
+                        <span class="text-sm text-gray-700">复制链接</span>
+                    </button>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <p class="text-sm text-gray-500 mb-2">测试链接</p>
+                    <div class="flex">
+                        <input type="text" id="shareLinkInput" value="https://personality-test.example.com" readonly class="flex-1 px-3 py-2 border border-gray-300 rounded-l-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <button id="copyLinkBtn" class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-primary/90 transition-colors">
+                            <i class="fa fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 测试题目数据
+        const questions = [
+            {
+                id: 1,
+                text: "当你与同事/朋友产生意见分歧时，你的第一反应是？",
+                options: [
+                    { value: 1, text: "立刻妥协，避免争论" },
+                    { value: 2, text: "沉默不语，假装同意" },
+                    { value: 3, text: "委婉表达，但尽量不激化矛盾" },
+                    { value: 4, text: "直接说出想法，不怕冲突" }
+                ],
+                dimension: 1,
+                isReverse: false
+            },
+            {
+                id: 2,
+                text: "你内心有不满情绪时，通常会如何处理？",
+                options: [
+                    { value: 1, text: "憋在心里，不让任何人知道" },
+                    { value: 2, text: "找借口转移注意力" },
+                    { value: 3, text: "向信任的人倾诉" },
+                    { value: 4, text: "直接表达不满" }
+                ],
+                dimension: 1,
+                isReverse: false
+            },
+            {
+                id: 3,
+                text: "你是否在意别人对你的负面评价？",
+                options: [
+                    { value: 1, text: "非常在意，甚至因此失眠" },
+                    { value: 2, text: "比较在意，会反复想" },
+                    { value: 3, text: "不太在意，做好自己就行" },
+                    { value: 4, text: "完全不在意，别人说什么与我无关" }
+                ],
+                dimension: 1,
+                isReverse: false
+            },
+            {
+                id: 4,
+                text: "当需要做决定时，你更倾向于？",
+                options: [
+                    { value: 1, text: "跟随别人的意见，避免承担责任" },
+                    { value: 2, text: "犹豫不决，征求多人建议" },
+                    { value: 3, text: "参考自己想法，再做决定" },
+                    { value: 4, text: "自己做决定，后果自负" }
+                ],
+                dimension: 1,
+                isReverse: false
+            },
+            {
+                id: 5,
+                text: "你认为职场中的晋升机会是？",
+                options: [
+                    { value: 1, text: "非常有限，只有少数人能获得" },
+                    { value: 2, text: "比较有限，需要努力争取" },
+                    { value: 3, text: "机会均等，只要有能力就能获得" },
+                    { value: 4, text: "非常多，只要愿意就能找到" }
+                ],
+                dimension: 2,
+                isReverse: false
+            },
+            {
+                id: 6,
+                text: "当同事获得比你更好的机会时，你会？",
+                options: [
+                    { value: 1, text: "嫉妒，觉得他抢了你的机会" },
+                    { value: 2, text: "有点失落，但会祝福他" },
+                    { value: 3, text: "无所谓，继续努力提升自己" },
+                    { value: 4, text: "为他高兴，认为这是他应得的" }
+                ],
+                dimension: 2,
+                isReverse: false
+            },
+            {
+                id: 7,
+                text: "你对'合作共赢'的看法是？",
+                options: [
+                    { value: 1, text: "不现实，最终还是要竞争" },
+                    { value: 2, text: "有一定道理，但仍需保持警惕" },
+                    { value: 3, text: "比较认同，合作能创造更多价值" },
+                    { value: 4, text: "非常认同，合作比竞争更重要" }
+                ],
+                dimension: 2,
+                isReverse: false
+            },
+            {
+                id: 8,
+                text: "你是否会因为担心'不够'而过度储蓄？",
+                options: [
+                    { value: 1, text: "是的，总是担心钱不够用" },
+                    { value: 2, text: "有时候会，尤其是遇到大事时" },
+                    { value: 3, text: "不太会，够花就行" },
+                    { value: 4, text: "完全不会，钱是赚出来的不是省的" }
+                ],
+                dimension: 2,
+                isReverse: false
+            },
+            {
+                id: 9,
+                text: "你是否需要别人的认可才能肯定自己？",
+                options: [
+                    { value: 1, text: "是的，没有认可就没有安全感" },
+                    { value: 2, text: "比较需要，别人的意见会影响我" },
+                    { value: 3, text: "不太需要，我相信自己的判断" },
+                    { value: 4, text: "完全不需要，我自己就是标准" }
+                ],
+                dimension: 3,
+                isReverse: false
+            },
+            {
+                id: 10,
+                text: "当朋友请求你帮忙时，即使你不愿意，你会？",
+                options: [
+                    { value: 1, text: "立刻答应，怕得罪他" },
+                    { value: 2, text: "犹豫一下，但最终还是会答应" },
+                    { value: 3, text: "说明自己的困难，拒绝请求" },
+                    { value: 4, text: "直接拒绝，不用找借口" }
+                ],
+                dimension: 3,
+                isReverse: false
+            },
+            {
+                id: 11,
+                text: "你是否会为了迎合别人而改变自己的观点？",
+                options: [
+                    { value: 1, text: "是的，总是顺着别人的意思说" },
+                    { value: 2, text: "有时候会，尤其是和重要的人在一起时" },
+                    { value: 3, text: "不太会，坚持自己的立场" },
+                    { value: 4, text: "完全不会，我有自己的原则" }
+                ],
+                dimension: 3,
+                isReverse: false
+            },
+            {
+                id: 12,
+                text: "你对'讨好型人格'的看法是？",
+                options: [
+                    { value: 1, text: "必要的，这样才能被喜欢" },
+                    { value: 2, text: "有点无奈，但不得不这么做" },
+                    { value: 3, text: "不太认同，会失去自我" },
+                    { value: 4, text: "非常认同，讨好能解决很多问题" }
+                ],
+                dimension: 3,
+                isReverse: true
+            },
+            {
+                id: 13,
+                text: "你对'计划赶不上变化'的看法是？",
+                options: [
+                    { value: 1, text: "非常焦虑，必须严格按照计划执行" },
+                    { value: 2, text: "有点焦虑，但会调整计划" },
+                    { value: 3, text: "不太在意，随机应变就好" },
+                    { value: 4, text: "非常认同，变化才是生活的乐趣" }
+                ],
+                dimension: 4,
+                isReverse: false
+            },
+            {
+                id: 14,
+                text: "你是否会反复检查门窗是否锁好？",
+                options: [
+                    { value: 1, text: "是的，每天都要检查好几次" },
+                    { value: 2, text: "有时候会，比如出门前" },
+                    { value: 3, text: "不太会，偶尔会忘" },
+                    { value: 4, text: "完全不会，没必要" }
+                ],
+                dimension: 4,
+                isReverse: false
+            },
+            {
+                id: 15,
+                text: "当遇到意外情况时，你会？",
+                options: [
+                    { value: 1, text: "非常紧张，不知所措" },
+                    { value: 2, text: "有点紧张，但会想办法解决" },
+                    { value: 3, text: "冷静应对，寻找解决办法" },
+                    { value: 4, text: "非常兴奋，觉得这是挑战" }
+                ],
+                dimension: 4,
+                isReverse: false
+            },
+            {
+                id: 16,
+                text: "你认为'控制欲'是？",
+                options: [
+                    { value: 1, text: "必要的，这样才能避免危险" },
+                    { value: 2, text: "有点必要，但不要太过分" },
+                    { value: 3, text: "不必要的，会让人窒息" },
+                    { value: 4, text: "非常认同，控制能带来安全感" }
+                ],
+                dimension: 4,
+                isReverse: false
+            }
+        ];
+
+        // 人格类型数据
+        const personalityTypes = [
+            {
+                id: 1,
+                name: "恐惧冲突压抑型",
+                description: "你倾向于避免冲突，习惯压抑自己的真实想法和需求。",
+                coreBelief: "\"冲突是危险的，压抑是唯一选择\"",
+                icon: "fa-shield",
+                color: "primary",
+                coreFeatures: [
+                    "害怕与人发生冲突，倾向于妥协和让步",
+                    "习惯压抑自己的真实想法和情感需求",
+                    "过度在意他人的评价和看法",
+                    "在决策时倾向于回避责任"
+                ],
+                formationReasons: "这种人格类型通常形成于童年时期，可能是在充满冲突的家庭环境中成长，或者曾经因为表达真实想法而受到惩罚或否定。长期以来，你学会了通过压抑自己来维持关系的和谐。",
+                strengths: [
+                    "善于维持和谐的人际关系",
+                    "富有同理心，能理解他人感受",
+                    "在团队中是很好的协调者",
+                    "通常比较温和友善"
+                ],
+                challenges: [
+                    "容易忽视自己的需求和感受",
+                    "长期压抑可能导致情绪问题",
+                    "在需要表达立场时缺乏自信",
+                    "可能被他人利用或忽视"
+                ],
+                growthSuggestions: [
+                    {
+                        title: "练习温和地表达自己的想法",
+                        description: "可以从小事开始，逐渐建立表达的自信"
+                    },
+                    {
+                        title: "区分\"冲突\"和\"建设性沟通\"",
+                        description: "学会用平和的方式表达不同意见"
+                    },
+                    {
+                        title: "关注自己的需求",
+                        description: "定期反思自己的感受和需求，不要总是优先考虑他人"
+                    },
+                    {
+                        title: "建立健康的边界",
+                        description: "学会说\"不\"，保护自己的时间和精力"
+                    }
+                ]
+            },
+            {
+                id: 2,
+                name: "资源匮乏争夺型",
+                description: "你认为世界资源有限，需要通过竞争和争夺才能获得自己想要的东西。",
+                coreBelief: "\"资源有限，必须争夺\"",
+                icon: "fa-trophy",
+                color: "secondary",
+                coreFeatures: [
+                    "认为世界资源稀缺，机会有限",
+                    "倾向于将人际关系视为竞争关系",
+                    "害怕错过机会，有强烈的紧迫感",
+                    "可能表现出嫉妒和占有欲"
+                ],
+                formationReasons: "这种人格类型可能形成于资源匮乏的成长环境，或者在竞争激烈的环境中长大。你可能曾经经历过资源不足的痛苦，因此学会了通过争夺来确保自己的生存和成功。",
+                strengths: [
+                    "有强烈的进取心和动力",
+                    "善于抓住机会，不会轻易放弃",
+                    "在竞争环境中表现出色",
+                    "对自己的目标非常专注"
+                ],
+                challenges: [
+                    "可能过度竞争，损害人际关系",
+                    "长期处于紧张状态，压力较大",
+                    "难以享受当下，总是担心未来",
+                    "可能忽视合作的重要性"
+                ],
+                growthSuggestions: [
+                    {
+                        title: "培养 abundance mindset（富足思维）",
+                        description: "意识到资源和机会是可以创造的，而不仅仅是争夺的"
+                    },
+                    {
+                        title: "学习合作与分享",
+                        description: "体验合作带来的共赢效果"
+                    },
+                    {
+                        title: "关注过程而非结果",
+                        description: "享受努力的过程，而不仅仅是最终的收获"
+                    },
+                    {
+                        title: "练习感恩",
+                        description: "关注自己已经拥有的，而不是缺少的"
+                    }
+                ]
+            },
+            {
+                id: 3,
+                name: "表达无价值讨好型",
+                description: "你习惯通过讨好他人来获得认可，害怕被拒绝和否定。",
+                coreBelief: "\"我的价值取决于他人认可\"",
+                icon: "fa-users",
+                color: "tertiary",
+                coreFeatures: [
+                    "过度关注他人的需求和感受",
+                    "害怕被拒绝或否定",
+                    "倾向于讨好他人，忽视自己的需求",
+                    "对批评非常敏感"
+                ],
+                formationReasons: "这种人格类型通常形成于需要通过讨好来获得关爱和认可的成长环境。你可能在童年时期学会了只有满足他人的需求，才能获得爱和关注。",
+                strengths: [
+                    "非常善解人意，能理解他人感受",
+                    "善于建立和维护人际关系",
+                    "通常很受欢迎，人际关系良好",
+                    "有很强的适应能力和同理心"
+                ],
+                challenges: [
+                    "可能失去自我，不知道自己真正想要什么",
+                    "长期讨好可能导致 resentment",
+                    "难以建立真实的、深度的连接",
+                    "可能吸引利用型的人际关系"
+                ],
+                growthSuggestions: [
+                    {
+                        title: "探索自己的价值观和需求",
+                        description: "花时间了解自己真正想要的是什么"
+                    },
+                    {
+                        title: "建立自我价值感",
+                        description: "意识到自己的价值不取决于他人的认可"
+                    },
+                    {
+                        title: "练习自我关怀",
+                        description: "像关心他人一样关心自己的需求"
+                    },
+                    {
+                        title: "建立健康的人际关系",
+                        description: "寻找能够接受真实的你的人"
+                    }
+                ]
+            },
+            {
+                id: 4,
+                name: "世界危险控制型",
+                description: "你认为世界不安全，需要通过控制来避免危险和不确定性。",
+                coreBelief: "\"世界充满危险，必须严格控制\"",
+                icon: "fa-cogs",
+                color: "warning",
+                coreFeatures: [
+                    "认为世界充满不确定性和危险",
+                    "有强烈的控制欲，喜欢一切按计划进行",
+                    "对变化和意外感到焦虑",
+                    "可能表现出完美主义倾向"
+                ],
+                formationReasons: "这种人格类型可能形成于不可预测或不安全的成长环境。你可能曾经经历过失控带来的痛苦，因此学会了通过控制来获得安全感。",
+                strengths: [
+                    "做事认真负责，注重细节",
+                    "善于规划和组织",
+                    "在危机时刻能够保持冷静",
+                    "通常很可靠，值得信任"
+                ],
+                challenges: [
+                    "过度控制可能导致压力和焦虑",
+                    "难以应对变化和意外情况",
+                    "可能过度要求他人，影响人际关系",
+                    "完美主义可能导致拖延或过度工作"
+                ],
+                growthSuggestions: [
+                    {
+                        title: "练习接纳不确定性",
+                        description: "尝试小范围地放手控制，体验不确定性带来的成长"
+                    },
+                    {
+                        title: "培养灵活性和适应性",
+                        description: "学习在计划之外寻找机会和乐趣"
+                    },
+                    {
+                        title: "关注当下，减少对未来的担忧",
+                        description: "通过冥想等方式练习活在当下"
+                    },
+                    {
+                        title: "建立内在安全感",
+                        description: "意识到真正的安全感来自内心，而不是外部控制"
+                    }
+                ]
+            }
+        ];
+
+        // 全局变量
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let dimensionScores = [0, 0, 0, 0]; // 四个维度的总分
+        let dimensionCounts = [4, 4, 4, 4]; // 每个维度的题目数量
+
+        // DOM元素
+        const startPage = document.getElementById('startPage');
+        const testPage = document.getElementById('testPage');
+        const resultPage = document.getElementById('resultPage');
+
+        const startTestBtn = document.getElementById('startTestBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const saveResultBtn = document.getElementById('saveResultBtn');
+        const shareResultBtn = document.getElementById('shareResultBtn');
+
+        const questionNumber = document.getElementById('questionNumber');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+
+        const helpBtn = document.getElementById('helpBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        const helpModal = document.getElementById('helpModal');
+        const shareModal = document.getElementById('shareModal');
+        const closeHelpBtn = document.getElementById('closeHelpBtn');
+        const closeShareBtn = document.getElementById('closeShareBtn');
+
+        // 事件监听器
+        document.addEventListener('DOMContentLoaded', function() {
+            // 重新获取DOM元素引用
+            const startTestBtn = document.getElementById('startTestBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const restartBtn = document.getElementById('restartBtn');
+            const saveResultBtn = document.getElementById('saveResultBtn');
+            const shareResultBtn = document.getElementById('shareResultBtn');
+            const helpBtn = document.getElementById('helpBtn');
+            const shareBtn = document.getElementById('shareBtn');
+            const closeHelpBtn = document.getElementById('closeHelpBtn');
+            const closeShareBtn = document.getElementById('closeShareBtn');
+            
+            // 绑定事件监听器
+            if (startTestBtn) startTestBtn.addEventListener('click', startTest);
+            if (prevBtn) prevBtn.addEventListener('click', goToPreviousQuestion);
+            if (nextBtn) nextBtn.addEventListener('click', goToNextQuestion);
+            if (restartBtn) restartBtn.addEventListener('click', restartTest);
+            if (saveResultBtn) saveResultBtn.addEventListener('click', saveResult);
+            if (shareResultBtn) shareResultBtn.addEventListener('click', shareResult);
+            if (helpBtn) helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+            if (shareBtn) shareBtn.addEventListener('click', () => shareModal.classList.remove('hidden'));
+            if (closeHelpBtn) closeHelpBtn.addEventListener('click', () => helpModal.classList.add('hidden'));
+            if (closeShareBtn) closeShareBtn.addEventListener('click', () => shareModal.classList.add('hidden'));
+        });
+
+        helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+        shareBtn.addEventListener('click', () => shareModal.classList.remove('hidden'));
+        closeHelpBtn.addEventListener('click', () => helpModal.classList.add('hidden'));
+        closeShareBtn.addEventListener('click', () => shareModal.classList.add('hidden'));
+
+        // 点击模态框外部关闭
+        helpModal.addEventListener('click', (e) => {
+            if (e.target === helpModal) helpModal.classList.add('hidden');
+        });
+
+        shareModal.addEventListener('click', (e) => {
+            if (e.target === shareModal) shareModal.classList.add('hidden');
+        });
+
+        // 开始测试
+        function startTest() {
+            startPage.classList.add('hidden');
+            testPage.classList.remove('hidden');
+            showQuestion(0);
+        }
+
+        // 显示当前问题
+        function showQuestion(index) {
+            const question = questions[index];
+            
+            // 添加题目切换动画
+            const questionContainer = document.querySelector('.bg-white.rounded-xl.shadow-md.p-8.mb-8');
+            questionContainer.classList.remove('animate-fade-in');
+            questionContainer.classList.add('animate-fade-out');
+            
+            setTimeout(() => {
+                // 更新题目内容
+                questionNumber.textContent = `题目 ${index + 1}/${questions.length}`;
+                questionText.textContent = question.text;
+                
+                // 生成选项
+                optionsContainer.innerHTML = '';
+                question.options.forEach((option, optionIndex) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'flex items-center opacity-0 translate-y-2 transition-all duration-300';
+                    optionDiv.innerHTML = `
+                        <input type="radio" id="option${index}-${optionIndex}" name="question${index}" value="${option.value}" 
+                               class="input-radio" ${userAnswers[index] === option.value ? 'checked' : ''}>
+                        <label for="option${index}-${optionIndex}" class="ml-3 flex-1 py-3 px-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-200">
+                            <span class="font-medium text-gray-900">${String.fromCharCode(65 + optionIndex)}. ${option.text}</span>
+                        </label>
+                    `;
+                    optionsContainer.appendChild(optionDiv);
+                    
+                    // 添加事件监听器
+                    const radio = optionDiv.querySelector('input[type="radio"]');
+                    const label = optionDiv.querySelector('label');
+                    
+                    radio.addEventListener('change', () => {
+                        userAnswers[index] = parseInt(radio.value);
+                        // 更新所有选项的样式
+                        document.querySelectorAll(`input[name="question${index}"]`).forEach(input => {
+                            const parentLabel = input.nextElementSibling;
+                            if (input.checked) {
+                                parentLabel.classList.add('border-primary', 'bg-primary/5');
+                            } else {
+                                parentLabel.classList.remove('border-primary', 'bg-primary/5');
+                            }
+                        });
+                    });
+                    
+                    // 初始样式设置
+                    if (userAnswers[index] === option.value) {
+                        label.classList.add('border-primary', 'bg-primary/5');
+                    }
+                    
+                    // 延迟显示选项，创建交错动画
+                    setTimeout(() => {
+                        optionDiv.classList.remove('opacity-0', 'translate-y-2');
+                    }, optionIndex * 80);
+                });
+                
+                // 恢复题目容器的显示动画
+                questionContainer.classList.remove('animate-fade-out');
+                questionContainer.classList.add('animate-fade-in');
+            }, 200);
+
+            // 更新进度条
+            const progress = ((index + 1) / questions.length) * 100;
+            progressText.textContent = `${index + 1}/${questions.length}`;
+            progressFill.style.width = `${progress}%`;
+            
+            // 添加进度条动画
+            progressFill.classList.remove('animate-pulse-slow');
+            void progressFill.offsetWidth; // 触发重排
+            progressFill.classList.add('animate-pulse-slow');
+
+            // 更新导航按钮状态
+            prevBtn.disabled = index === 0;
+            prevBtn.classList.toggle('opacity-50', index === 0);
+            prevBtn.classList.toggle('cursor-not-allowed', index === 0);
+            
+            nextBtn.textContent = index === questions.length - 1 ? '完成测试' : '下一题';
+            nextBtn.innerHTML = index === questions.length - 1 ? 
+                '完成测试<i class="fa fa-check ml-2"></i>' : 
+                '下一题<i class="fa fa-arrow-right ml-2"></i>';
+        }
+
+        // 上一题
+        function goToPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        // 下一题
+        function goToNextQuestion() {
+            // 检查是否选择了答案
+            if (userAnswers[currentQuestionIndex] === null) {
+                alert('请选择一个选项');
+                return;
+            }
+
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            } else {
+                // 计算结果
+                calculateResult();
+                showResult();
+            }
+        }
+
+        // 计算测试结果
+        function calculateResult() {
+            // 重置维度得分
+            dimensionScores = [0, 0, 0, 0];
+            
+            // 计算每个维度的得分
+            questions.forEach((question, index) => {
+                const dimensionIndex = question.dimension - 1;
+                let score = userAnswers[index];
+                
+                // 处理反向题
+                if (question.isReverse) {
+                    score = 5 - score; // 1变4，2变3，3变2，4变1
+                }
+                
+                dimensionScores[dimensionIndex] += score;
+            });
+        }
+
+        // 显示结果
+        function showResult() {
+            testPage.classList.add('hidden');
+            resultPage.classList.remove('hidden');
+            
+            // 计算平均分
+            const dimensionAverages = dimensionScores.map((score, index) => score / dimensionCounts[index]);
+            
+            // 找出得分最高的维度
+            let maxScore = Math.max(...dimensionAverages);
+            let maxIndex = dimensionAverages.indexOf(maxScore);
+            
+            // 获取对应的人格类型
+            const personality = personalityTypes[maxIndex];
+            
+            // 更新结果页面
+            document.getElementById('personalityName').textContent = personality.name;
+            document.getElementById('personalityDescription').textContent = personality.description;
+            document.getElementById('coreBelief').textContent = personality.coreBelief;
+            document.getElementById('personalityIconClass').className = `fa ${personality.icon} text-4xl`;
+            
+            // 更新维度得分，添加动画效果
+            updateDimensionScore('dimension1Score', dimensionAverages[0], 'dimension1Bar');
+            updateDimensionScore('dimension2Score', dimensionAverages[1], 'dimension2Bar');
+            updateDimensionScore('dimension3Score', dimensionAverages[2], 'dimension3Bar');
+            updateDimensionScore('dimension4Score', dimensionAverages[3], 'dimension4Bar');
+            
+            // 更新详细解读
+            updateDetailedInterpretation(personality);
+            
+            // 添加结果页面动画
+            const resultSections = resultPage.querySelectorAll('.bg-white, .bg-gradient-to-r');
+            resultSections.forEach((section, index) => {
+                section.classList.add('opacity-0', 'translate-y-4');
+                setTimeout(() => {
+                    section.classList.remove('opacity-0', 'translate-y-4');
+                    section.classList.add('transition-all', 'duration-500', 'ease-out');
+                }, index * 100);
+            });
+            
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // 更新维度得分并添加动画
+        function updateDimensionScore(scoreId, score, barId) {
+            const scoreElement = document.getElementById(scoreId);
+            const barElement = document.getElementById(barId);
+            
+            // 数字动画
+            let currentScore = 0;
+            const increment = score / 50;
+            const interval = setInterval(() => {
+                currentScore += increment;
+                if (currentScore >= score) {
+                    currentScore = score;
+                    clearInterval(interval);
+                }
+                scoreElement.textContent = currentScore.toFixed(1);
+            }, 20);
+            
+            // 进度条动画
+            setTimeout(() => {
+                barElement.style.width = `${(score / 4) * 100}%`;
+            }, 100);
+        }
+
+        // 更新详细解读
+        function updateDetailedInterpretation(personality) {
+            // 核心特征
+            const coreFeaturesHtml = personality.coreFeatures.map(feature => `
+                <li class="flex items-start">
+                    <i class="fa fa-circle text-${personality.color} mt-1.5 mr-3 text-xs"></i>
+                    <span>${feature}</span>
+                </li>
+            `).join('');
+            document.getElementById('coreFeatures').innerHTML = coreFeaturesHtml;
+            
+            // 形成原因
+            document.getElementById('formationReasons').textContent = personality.formationReasons;
+            
+            // 优势
+            const strengthsHtml = personality.strengths.map(strength => `
+                <li class="flex items-start">
+                    <i class="fa fa-check text-green-600 mt-1 mr-2"></i>
+                    <span>${strength}</span>
+                </li>
+            `).join('');
+            document.getElementById('strengths').innerHTML = strengthsHtml;
+            
+            // 挑战
+            const challengesHtml = personality.challenges.map(challenge => `
+                <li class="flex items-start">
+                    <i class="fa fa-exclamation text-red-600 mt-1 mr-2"></i>
+                    <span>${challenge}</span>
+                </li>
+            `).join('');
+            document.getElementById('challenges').innerHTML = challengesHtml;
+            
+            // 成长建议
+            const suggestionsHtml = personality.growthSuggestions.map(suggestion => `
+                <li class="flex items-start">
+                    <i class="fa fa-lightbulb-o text-yellow-600 mt-1 mr-3"></i>
+                    <div>
+                        <span class="font-medium">${suggestion.title}</span>
+                        <p class="mt-1 text-gray-500">${suggestion.description}</p>
+                    </div>
+                </li>
+            `).join('');
+            document.getElementById('growthSuggestions').innerHTML = suggestionsHtml;
+        }
+
+        // 重新测试
+        function restartTest() {
+            currentQuestionIndex = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            dimensionScores = [0, 0, 0, 0];
+            
+            resultPage.classList.add('hidden');
+            startPage.classList.remove('hidden');
+            
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 保存结果
+        function saveResult() {
+            alert('结果已保存到本地！');
+            // 实际应用中可以实现将结果保存为图片或PDF
+        }
+
+        // 分享结果
+        function shareResult() {
+            shareModal.classList.remove('hidden');
+        }
+
+        // 键盘导航
+        document.addEventListener('keydown', (e) => {
+            if (testPage.classList.contains('hidden')) return;
+            
+            if (e.key === 'ArrowLeft') {
+                goToPreviousQuestion();
+            } else if (e.key === 'ArrowRight') {
+                goToNextQuestion();
+            } else if (e.key >= '1' && e.key <= '4') {
+                const optionIndex = parseInt(e.key) - 1;
+                const radio = document.querySelector(`input[name="question${currentQuestionIndex}"][value="${optionIndex + 1}"]`);
+                if (radio) {
+                    radio.checked = true;
+                    userAnswers[currentQuestionIndex] = optionIndex + 1;
+                    // 更新选项样式
+                    document.querySelectorAll(`input[name="question${currentQuestionIndex}"]`).forEach(input => {
+                        const parentLabel = input.nextElementSibling;
+                        if (input.checked) {
+                            parentLabel.classList.add('border-primary', 'bg-primary/5');
+                        } else {
+                            parentLabel.classList.remove('border-primary', 'bg-primary/5');
+                        }
+                    });
+                }
+            } else if (e.key.toLowerCase() >= 'a' && e.key.toLowerCase() <= 'd') {
+                const optionIndex = e.key.toLowerCase().charCodeAt(0) - 'a'.charCodeAt(0);
+                const radio = document.querySelector(`input[name="question${currentQuestionIndex}"][value="${optionIndex + 1}"]`);
+                if (radio) {
+                    radio.checked = true;
+                    userAnswers[currentQuestionIndex] = optionIndex + 1;
+                    // 更新选项样式
+                    document.querySelectorAll(`input[name="question${currentQuestionIndex}"]`).forEach(input => {
+                        const parentLabel = input.nextElementSibling;
+                        if (input.checked) {
+                            parentLabel.classList.add('border-primary', 'bg-primary/5');
+                        } else {
+                            parentLabel.classList.remove('border-primary', 'bg-primary/5');
+                        }
+                    });
+                }
+            }
+        });
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 添加页面加载动画
+            document.body.classList.add('loaded');
+            
+            // 检查URL参数，如果有分享参数可以直接显示结果页面
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('shared')) {
+                // 可以根据需要实现分享功能
+            }
+            
+            // 复制链接功能
+            const copyLinkBtn = document.getElementById('copyLinkBtn');
+            const shareLinkInput = document.getElementById('shareLinkInput');
+            if (copyLinkBtn && shareLinkInput) {
+                copyLinkBtn.addEventListener('click', () => {
+                    shareLinkInput.select();
+                    shareLinkInput.setSelectionRange(0, 99999); // 移动端兼容
+                    navigator.clipboard.writeText(shareLinkInput.value).then(() => {
+                        const originalIcon = copyLinkBtn.innerHTML;
+                        copyLinkBtn.innerHTML = '<i class="fa fa-check"></i>';
+                        copyLinkBtn.classList.add('bg-green-600');
+                        setTimeout(() => {
+                            copyLinkBtn.innerHTML = originalIcon;
+                            copyLinkBtn.classList.remove('bg-green-600');
+                        }, 2000);
+                    });
+                });
+            }
+            
+            // ESC键关闭模态框
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    helpModal.classList.add('hidden');
+                    shareModal.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
